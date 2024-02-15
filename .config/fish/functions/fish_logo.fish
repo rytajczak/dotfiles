@@ -30,9 +30,9 @@ See set_color --help for more on available colors.'
 
     echo '                 '$o'___
   ___======____='$m'-'$i'-'$m'-='$o')
-/T            \_'$i'--='$m'=='$o')   Women fear me
-'$mouth' \ '$m'('$i$eye$m')   '$o'\~    \_'$i'-='$m'='$o')   Fish fear me
- \      / )J'$m'~~    '$o'\\'$i'-='$o')   Men turn their eyes away from me
+/T            \_'$i'--='$m'=='$o')    Women fear me
+'$mouth' \ '$m'('$i$eye$m')   '$o'\~    \_'$i'-='$m'='$o')    Fish fear me
+ \      / )J'$m'~~    '$o'\\'$i'-='$o')    Men turn their eyes away from me
   \\\\___/  )JJ'$m'~'$i'~~   '$o'\)
    \_____/JJJ'$m'~~'$i'~~    '$o'\\
    '$m'/ '$o'\  '$i', \\'$o'J'$m'~~~'$i'~~     '$m'\\

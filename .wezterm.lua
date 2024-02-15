@@ -14,7 +14,6 @@ config.color_scheme = 'Better Material'
 
 -- General Settings
 config.enable_tab_bar = false
-config.initial_cols = 160
-config.initial_rows = 48
+config.window_background_opacity = 0.9
 
 return config
