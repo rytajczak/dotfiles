@@ -1,4 +1,5 @@
 makefile
+*.sh
 
 RCS
 .+,v
