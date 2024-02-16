@@ -1,7 +1,6 @@
 local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
--- Shell
 config.default_prog = { '/usr/bin/fish'}
 
 -- Theme
@@ -11,6 +10,7 @@ config.color_schemes = {
 	['Better Material'] = material,
 }
 config.color_scheme = 'Better Material'
+config.font_size = 14
 
 -- General Settings
 config.enable_tab_bar = false
