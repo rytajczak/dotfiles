@@ -13,9 +13,9 @@ function fish_greeting
     echo '                 '$o'___
   ___======____='$m'-'$i'-'$m'-='$o')
 /T            \_'$i'--='$m'=='$o')    '$user'@'$host'
-'\[' \ '$m'('$i'O'$m')   '$o'\~    \_'$i'-='$m'='$o')    Fish fear me
- \      / )J'$m'~~    '$o'\\'$i'-='$o')    Men turn their eyes away from me
-  \\\\___/  )JJ'$m'~'$i'~~   '$o'\)
+'\[' \ '$m'('$i'O'$m')   '$o'\~    \_'$i'-='$m'='$o')    Women fear me
+ \      / )J'$m'~~    '$o'\\'$i'-='$o')    Fish fear me
+  \\\\___/  )JJ'$m'~'$i'~~   '$o'\)     Men turn their eyes away frome me
    \_____/JJJ'$m'~~'$i'~~    '$o'\\
    '$m'/ '$o'\  '$i', \\'$o'J'$m'~~~'$i'~~     '$m'\\
   (-'$i'\)'$o'\='$m'|'$i'\\\\\\'$m'~~'$i'~~       '$m'L_'$i'_
@@ -35,6 +35,7 @@ alias gg="lazygit"
 
 # Constants
 set -gx EDITOR nvim
+set --universal FZF_DEFAULT_COMMAND 'fd'
 
 # Init bruv bo'oh'o'wa'er
 starship init fish | source
