@@ -3,7 +3,6 @@ return {
   lazy = true,
   name = "catppuccin",
   opts = {
-    transparent_background = true,
     no_bold = false,
     integrations = {
       harpoon = true,
