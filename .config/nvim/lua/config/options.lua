@@ -1,14 +1,14 @@
-local opt = vim.opt -- for conciseness
+local opt = vim.opt
 
--- line numbers
-opt.relativenumber = true -- show relative line numbers
-opt.number = true -- shows absolute line number on cursor line (when relative number is on)
+-- Line numbers
+opt.relativenumber = true
+opt.number = true
 
--- tabs & indentation
-opt.tabstop = 2 -- 2 spaces for tabs (prettier default)
-opt.shiftwidth = 2 -- 2 spaces for indent width
-opt.expandtab = true -- expand tab to spaces
-opt.autoindent = true -- copy indent from current line when starting new one
+-- Tabs & indentation
+opt.tabstop = 2
+opt.shiftwidth = 2
+opt.expandtab = true
+opt.autoindent = true
 
 -- line wrapping
 opt.wrap = false -- disable line wrapping

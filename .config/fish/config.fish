@@ -33,6 +33,8 @@ alias ga="git add ."
 alias gp="git push"
 alias gg="lazygit"
 
+bind \cz 'fg 2>/dev/null; commandline -f repaint'
+
 # Constants
 set -gx EDITOR nvim
 set --universal FZF_DEFAULT_COMMAND 'fd'
