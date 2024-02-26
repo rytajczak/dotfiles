@@ -1,1 +1,3 @@
-../../../../.dotfiles/.config/nvim/lua/plugins/indentline.lua
+return { 
+  "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} 
+}
