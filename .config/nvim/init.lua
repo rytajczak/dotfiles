@@ -1,3 +1,1 @@
-require("config")
-
-vim.cmd.colorscheme("catppuccin")
+../../.dotfiles/.config/nvim/init.lua

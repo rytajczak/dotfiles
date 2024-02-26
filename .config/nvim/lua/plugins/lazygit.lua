@@ -1,6 +1,1 @@
-return {
-  "kdheepak/lazygit.nvim",
-  dependencies = {
-    "nvim-lua/plenary.nvim"
-  }
-}
+../../../../.dotfiles/.config/nvim/lua/plugins/lazygit.lua
