@@ -1,7 +1,9 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
-config.default_prog = { "/usr/bin/fish" }
+config.enable_wayland = false
+
+config.default_prog = {"fish"}
 
 -- Theme
 local material = wezterm.color.get_builtin_schemes()["Monokai (base16)"]
