@@ -15,7 +15,7 @@ function fish_greeting
 /T            \_'$i'--='$m'=='$o')    '$user'@'$host'
 '\[' \ '$m'('$i'O'$m')   '$o'\~    \_'$i'-='$m'='$o')    Women fear me
  \      / )J'$m'~~    '$o'\\'$i'-='$o')    Fish fear me
-  \\\\___/  )JJ'$m'~'$i'~~   '$o'\)     Men turn their eyes away frome me
+  \\\\___/  )JJ'$m'~'$i'~~   '$o'\)     Men turn their eyes away from me
    \_____/JJJ'$m'~~'$i'~~    '$o'\\
    '$m'/ '$o'\  '$i', \\'$o'J'$m'~~~'$i'~~     '$m'\\
   (-'$i'\)'$o'\='$m'|'$i'\\\\\\'$m'~~'$i'~~       '$m'L_'$i'_
@@ -28,7 +28,7 @@ function fish_greeting
 end
 
 # Alias
-alias ls="exa -l"
+alias ls="exa -l --icons"
 alias ga="git add ."
 alias gp="git push"
 alias gg="lazygit"
