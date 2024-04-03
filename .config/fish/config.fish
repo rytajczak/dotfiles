@@ -3,9 +3,9 @@ if status is-interactive
 end
 
 function fish_greeting
-    set o (set_color 'red')
-    set m (set_color 'f70')
-    set i (set_color 'yellow')
+    set o (set_color '759FF0')
+    set m (set_color 'A3ADD1')
+    set i (set_color '7E87A1')
 
     set user (whoami)
     set host (prompt_hostname)
@@ -42,6 +42,7 @@ set --universal FZF_DEFAULT_COMMAND 'fd'
 # Init bruv bo'oh'o'wa'er
 starship init fish | source
 zoxide init fish | source
+direnv hook fish | source
 
 # Binaries
 set -x GOPATH $HOME/go
