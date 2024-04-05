@@ -11,7 +11,7 @@ return {
       harpoon = true
     }
   },
-sitter = true,
+  sitter = true,
   config = function(_, opts)
     require("catppuccin").setup(opts)
   end

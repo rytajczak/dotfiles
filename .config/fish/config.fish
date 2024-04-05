@@ -12,10 +12,10 @@ function fish_greeting
 
     echo '                 '$o'___
   ___======____='$m'-'$i'-'$m'-='$o')
-/T            \_'$i'--='$m'=='$o')    '$user'@'$host'
-'\[' \ '$m'('$i'O'$m')   '$o'\~    \_'$i'-='$m'='$o')    Women fear me
- \      / )J'$m'~~    '$o'\\'$i'-='$o')    Fish fear me
-  \\\\___/  )JJ'$m'~'$i'~~   '$o'\)     Men turn their eyes away from me
+/T            \_'$i'--='$m'=='$o')    '$user(set_color normal)'@'$o$host'
+'\[' \ '$m'('$i'O'$m')   '$o'\~    \_'$i'-='$m'='$o')'$m'    Women fear me, Fish fear me,
+ \      / )J'$m'~~    '$o'\\'$i'-='$o')'$m'    Men turn their eyes away from me
+  \\\\___/  )JJ'$m'~'$i'~~   '$o'\)     
    \_____/JJJ'$m'~~'$i'~~    '$o'\\
    '$m'/ '$o'\  '$i', \\'$o'J'$m'~~~'$i'~~     '$m'\\
   (-'$i'\)'$o'\='$m'|'$i'\\\\\\'$m'~~'$i'~~       '$m'L_'$i'_

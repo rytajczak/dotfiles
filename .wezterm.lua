@@ -6,7 +6,7 @@ config.enable_wayland = false
 config.default_prog = { "fish" }
 
 -- Theme
-local material = wezterm.color.get_builtin_schemes()["Monokai (base16)"]
+local material = wezterm.color.get_builtin_schemes()["MaterialDarker"]
 material.background = "#161414"
 config.color_schemes = {
 	["Better Material"] = material,
@@ -16,7 +16,7 @@ config.font_size = 12
 
 -- General Settings
 config.enable_tab_bar = false
-config.window_background_opacity = 0.9
+-- config.window_background_opacity = 0.9
 config.window_padding = {
 	left = 0,
 	right = 0,
