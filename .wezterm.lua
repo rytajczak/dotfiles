@@ -11,7 +11,7 @@ material.background = "#161414"
 config.color_schemes = {
 	["Better Material"] = material,
 }
-config.color_scheme = "Better Material"
+config.color_scheme = "MaterialDarker"
 config.font_size = 12
 
 -- General Settings
