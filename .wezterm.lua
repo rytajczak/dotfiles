@@ -6,12 +6,12 @@ config.enable_wayland = false
 config.default_prog = { "fish" }
 
 -- Theme
-local material = wezterm.color.get_builtin_schemes()["MaterialDarker"]
-material.background = "#161414"
+local custom = wezterm.color.get_builtin_schemes()["MaterialDarker"]
+custom.background = "#2C282D"
 config.color_schemes = {
-	["Better Material"] = material,
+	["custom"] = custom,
 }
-config.color_scheme = "MaterialDarker"
+config.color_scheme = "custom"
 config.font_size = 12
 
 -- General Settings
