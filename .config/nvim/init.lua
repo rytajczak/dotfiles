@@ -1,2 +1,3 @@
 require("config")
-vim.cmd.colorscheme("catppuccin")
+vim.g.material_style = "darker"
+vim.cmd.colorscheme("material")
