@@ -28,7 +28,7 @@ function fish_greeting
 end
 
 # Alias
-alias ls="exa -l --icons"
+alias ls="eza -l --icons"
 alias ga="git add ."
 alias gp="git push"
 alias gg="lazygit"
