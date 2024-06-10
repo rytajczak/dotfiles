@@ -28,9 +28,7 @@ function fish_greeting
 end
 
 # Alias
-alias ls="eza -l --icons"
-alias ga="git add ."
-alias gp="git push"
+alias ls="eza"
 alias gg="lazygit"
 
 bind \cz 'fg 2>/dev/null; commandline -f repaint'
@@ -42,7 +40,6 @@ set --universal FZF_DEFAULT_COMMAND 'fd'
 # Init bruv bo'oh'o'wa'er
 starship init fish | source
 zoxide init fish | source
-direnv hook fish | source
 
 # Binaries
 set -x GOPATH $HOME/go
