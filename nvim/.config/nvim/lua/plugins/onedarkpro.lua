@@ -2,12 +2,12 @@ return {
   {
     'olimorris/onedarkpro.nvim',
     priority = 1000,
+    opts = {
+      options = {
+        transparency = true,
+      },
+    },
     init = function()
-      require('onedarkpro').setup {
-        options = {
-          transparency = true,
-        },
-      }
       vim.cmd.colorscheme 'onedark'
       vim.cmd.hi 'Comment gui=none'
     end,
