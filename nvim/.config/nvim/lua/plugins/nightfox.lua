@@ -1,14 +1,14 @@
 return {
   {
-    'olimorris/onedarkpro.nvim',
+    'EdenEast/nightfox.nvim',
     priority = 1000,
     opts = {
       options = {
-        transparency = true,
+        transparent = true,
       },
     },
     init = function()
-      vim.cmd.colorscheme 'onedark'
+      vim.cmd.colorscheme 'carbonfox'
       vim.cmd.hi 'Comment gui=none'
     end,
   },
