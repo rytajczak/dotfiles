@@ -28,28 +28,9 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 autoload -Uz compinit; compinit
 
-# Syntax highlighting
-ZSH_SYNTAX_HIGHLIGHTING_DIR="$HOME/.zsh/zsh-syntax-highlighting"
-if [ -d "$ZSH_SYNTAX_HIGHLIGHTING_DIR" ]; then
-    source "$ZSH_SYNTAX_HIGHLIGHTING_DIR/zsh-syntax-highlighting.zsh"
-fi
-
-# Autosuggestions
-ZSH_AUTOSUGGESTIONS_DIR="$HOME/.zsh/zsh-autosuggestions"
-if [ -d "$ZSH_AUTOSUGGESTIONS_DIR" ]; then
-    source "$ZSH_AUTOSUGGESTIONS_DIR/zsh-autosuggestions.zsh"
-fi
-
-# fzf-tab
-FZF_TAB_DIR="$HOME/.zsh/fzf-tab"
-if [ -d "$FZF_TAB_DIR" ]; then
-    source "$FZF_TAB_DIR/fzf-tab.plugin.zsh"
-fi
-
 # Set editor to Neovim
 export EDITOR='nvim'
 export VISUAL='nvim'
 
 eval "$(starship init zsh)"
 eval "$(zoxide init --cmd cd zsh)"
-eval "$(fzf --zsh)"
