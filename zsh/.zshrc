@@ -2,11 +2,11 @@
 setopt CORRECT
 
 # Aliases
-alias ll='ls -lah'
+alias ga='git add .'
+alias gc='git commit -m'
 alias gs='git status'
 alias gp='git pull'
 alias gpush='git push'
-alias gc='git commit -m'
 alias v='nvim'
 
 # History settings
@@ -20,13 +20,6 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
-
-# Completion
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
-autoload -Uz compinit; compinit
 
 # Set editor to Neovim
 export EDITOR='nvim'
