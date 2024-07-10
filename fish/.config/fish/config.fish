@@ -3,6 +3,10 @@ set -gx PATH /usr/local/bin $PATH
 set -gx LANG en_US.UTF-8
 set -U fish_greeting
 
+if test -n "$DISPLAY"
+  setxkbmap -layout us -variant colemak_dh
+end
+
 # Interactive configruation
 if status is-interactive
   set -gx EDITOR nvim
