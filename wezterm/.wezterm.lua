@@ -6,7 +6,7 @@ config.default_prog = { "tmux" }
 config.font_size = 14
 config.font = wezterm.font("0xProto Nerd Font Mono")
 
-config.color_scheme = "Catppuccin Mocha"
+config.color_scheme = "Apple System Colors"
 config.colors = { background = "#161414" }
 
 config.enable_tab_bar = false
