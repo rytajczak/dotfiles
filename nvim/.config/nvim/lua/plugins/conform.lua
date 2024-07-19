@@ -8,6 +8,7 @@ return {
 			html = { "prettier" },
 			vue = { "prettier" },
 			yaml = { "prettier" },
+			go = { "gopls" },
 		},
 		format_on_save = {
 			-- These options will be passed to conform.format()
