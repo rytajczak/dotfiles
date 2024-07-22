@@ -7,7 +7,7 @@ config.font_size = 14
 config.font = wezterm.font("0xProto Nerd Font Mono")
 
 config.color_scheme = "carbonfox"
-config.colors = { background = "#161616" }
+config.colors = { background = "#242424" }
 
 config.enable_tab_bar = false
 config.enable_wayland = false
