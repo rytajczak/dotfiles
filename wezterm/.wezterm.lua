@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
-config.default_prog = { "fish" }
+config.default_prog = { "zsh" }
 
 config.font_size = 14
 config.font = wezterm.font("JetBrainsMono Nerd Font")
