@@ -23,34 +23,24 @@ require('lazy').setup {
     event = 'InsertEnter',
     config = true,
   },
-  {
+  { -- Because mini.surround is bad
     'olrtg/nvim-emmet',
     config = function()
       vim.keymap.set({ 'n', 'v' }, '<leader>w', require('nvim-emmet').wrap_with_abbreviation)
     end,
-  },
-  {
-    'OXY2DEV/markview.nvim',
-    lazy = false, -- Recommended
-    -- ft = "markdown" -- If you decide to lazy-load anyway
-
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'nvim-tree/nvim-web-devicons',
-    },
   },
   { -- File Manager
     'stevearc/oil.nvim',
     opts = {},
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
-      require('oil').setup {}
+      require('oil').setup {
+        view_options = {
+          show_hidden = true
+        }
+      }
       vim.keymap.set('n', '<leader>e', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
     end,
-  },
-  {
-    'nvim-tree/nvim-tree.lua',
-    opts = {},
   },
   { -- The more stevearc plugins the better
     'stevearc/dressing.nvim',
@@ -90,20 +80,20 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>tR', '<CMD>OverseerRestartLast<CR>', { desc = 'Restart last task' })
     end,
   },
+  { -- You know Neovim is shit when you install a plugin to help write config
+    'folke/lazydev.nvim',
+    opts = {
+      library = {
+        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+      },
+    },
+  },
   { -- LSP Config
     'neovim/nvim-lspconfig',
     dependencies = {
       { 'williamboman/mason.nvim', opts = {} },
       'williamboman/mason-lspconfig.nvim',
-      { -- You know Neovim is shit when you install a plugin to help write config
-        'folke/lazydev.nvim',
-        opts = {
-          library = {
-            { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
-          },
-        },
-      },
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -129,27 +119,20 @@ require('lazy').setup {
       }
     end,
   },
-  { -- Auto Completion
+  {
     'saghen/blink.cmp',
     version = '*',
     opts = {
       keymap = { preset = 'super-tab' },
       appearance = {
         use_nvim_cmp_as_default = true,
-        nerd_font_variant = 'mono',
+        nerd_font_variant = 'mono'
       },
-      completion = {
-        menu = {
-          draw = {
-            columns = { { 'kind_icon', 'label', gap = 1 }, { 'label_description' } },
-            treesitter = { 'lsp' },
-          },
-        },
-        documentation = { auto_show = true, auto_show_delay_ms = 500 },
+      sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
       },
-      signature = { enabled = true },
     },
-    opts_extend = { 'sources.default' },
+    opts_extend = { "sources.default" }
   },
   { -- Formatting
     'stevearc/conform.nvim',

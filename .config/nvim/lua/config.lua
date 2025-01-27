@@ -12,10 +12,10 @@ o.splitright = true
 o.splitbelow = true
 
 o.title = true
+o.tabstop = 4
+o.shiftwidth = 4
 o.autoindent = true
 o.smartindent = true
-o.hlsearch = true
-o.backup = false
 o.cmdheight = 0
 o.scrolloff = 10
 
