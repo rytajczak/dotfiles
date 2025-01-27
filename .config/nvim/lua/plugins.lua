@@ -59,8 +59,11 @@ require('lazy').setup {
       end, { desc = 'Search nvim config files' })
     end,
   },
-  { -- Task Manager
+  { -- The best plugin to ever exist
     'stevearc/overseer.nvim',
+    dependencies = {
+      { 'rcarriga/nvim-notify', opts = {} }
+    },
     config = function()
       require('overseer').setup {
         task_list = { direction = 'right' },
@@ -119,7 +122,7 @@ require('lazy').setup {
       }
     end,
   },
-  {
+  { -- Completion
     'saghen/blink.cmp',
     version = '*',
     opts = {
