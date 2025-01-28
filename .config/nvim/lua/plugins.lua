@@ -23,12 +23,6 @@ require('lazy').setup {
     event = 'InsertEnter',
     config = true,
   },
-  { -- Because mini.surround is bad
-    'olrtg/nvim-emmet',
-    config = function()
-      vim.keymap.set({ 'n', 'v' }, '<leader>w', require('nvim-emmet').wrap_with_abbreviation)
-    end,
-  },
   { -- File Manager
     'stevearc/oil.nvim',
     opts = {},
@@ -41,10 +35,6 @@ require('lazy').setup {
       }
       vim.keymap.set('n', '<leader>e', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
     end,
-  },
-  { -- The more stevearc plugins the better
-    'stevearc/dressing.nvim',
-    opts = {},
   },
   { -- Fuzzy Finder
     'nvim-telescope/telescope.nvim',
@@ -59,10 +49,25 @@ require('lazy').setup {
       end, { desc = 'Search nvim config files' })
     end,
   },
-  { -- The best plugin to ever exist
+  {
+    'akinsho/toggleterm.nvim',
+    version = "*",
+    config = function()
+      local Terminal = require("toggleterm.terminal").Terminal
+
+      local lazygit = Terminal:new({ cmd = "lazygit", direction = "float" })
+      vim.api.nvim_create_user_command("ToggleLazyGit", function()
+        lazygit:toggle()
+      end, {})
+
+      vim.keymap.set("n", "<leader>gg", "<cmd>ToggleLazyGit<CR>")
+    end
+  },
+  { -- Task Manager
     'stevearc/overseer.nvim',
     dependencies = {
-      { 'rcarriga/nvim-notify', opts = {} }
+      { 'stevearc/dressing.nvim', opts = {} },
+      { 'rcarriga/nvim-notify',   opts = {} }
     },
     config = function()
       require('overseer').setup {
@@ -175,11 +180,5 @@ require('lazy').setup {
     init = function()
       vim.cmd.colorscheme 'vscode'
     end,
-  },
-  {
-    'navarasu/onedark.nvim',
-    opts = {
-      style = 'warmer',
-    },
   },
 }
