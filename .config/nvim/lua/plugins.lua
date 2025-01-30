@@ -67,12 +67,14 @@ require('lazy').setup {
     'stevearc/overseer.nvim',
     dependencies = {
       { 'stevearc/dressing.nvim', opts = {} },
-      { 'rcarriga/nvim-notify',   opts = {} }
+      'rcarriga/nvim-notify'
     },
     config = function()
       require('overseer').setup {
         task_list = { direction = 'right' },
       }
+      vim.notify = require("notify")
+
       vim.api.nvim_create_user_command('OverseerRestartLast', function()
         local overseer = require 'overseer'
         local tasks = overseer.list_tasks { recent_first = true }
@@ -82,9 +84,12 @@ require('lazy').setup {
           overseer.run_action(tasks[1], 'restart')
         end
       end, {})
+
       vim.keymap.set('n', '<leader>tt', '<CMD>OverseerToggle<CR>', { desc = 'Toggle overseer' })
       vim.keymap.set('n', '<leader>tr', '<CMD>OverseerRun<CR>', { desc = 'Run a task' })
       vim.keymap.set('n', '<leader>tb', '<CMD>OverseerBuild<CR>', { desc = 'Build a task' })
+      vim.keymap.set('n', '<leader>ts', '<CMD>OverseerSaveBundle<CR>', { desc = 'Save bundle' })
+      vim.keymap.set('n', '<leader>tl', '<CMD>OverseerLoadBundle<CR>', { desc = 'Load bundle' })
       vim.keymap.set('n', '<leader>tR', '<CMD>OverseerRestartLast<CR>', { desc = 'Restart last task' })
     end,
   },
