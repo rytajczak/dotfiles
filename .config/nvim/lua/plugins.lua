@@ -14,7 +14,7 @@ require('lazy').setup {
     'echasnovski/mini.nvim',
     version = false,
     config = function()
-      require('mini.surround').setup()
+      require('mini.ai').setup()
       require('mini.statusline').setup()
     end,
   },
@@ -48,20 +48,6 @@ require('lazy').setup {
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = 'Search nvim config files' })
     end,
-  },
-  {
-    'akinsho/toggleterm.nvim',
-    version = "*",
-    config = function()
-      local Terminal = require("toggleterm.terminal").Terminal
-
-      local lazygit = Terminal:new({ cmd = "lazygit", direction = "float" })
-      vim.api.nvim_create_user_command("ToggleLazyGit", function()
-        lazygit:toggle()
-      end, {})
-
-      vim.keymap.set("n", "<leader>gg", "<cmd>ToggleLazyGit<CR>")
-    end
   },
   { -- Task Manager
     'stevearc/overseer.nvim',
@@ -120,7 +106,6 @@ require('lazy').setup {
         end,
       })
 
-      local capabilities = require('blink.cmp').get_lsp_capabilities()
       require('mason-lspconfig').setup {
         ensure_installed = { 'lua_ls' },
         automatic_installation = true,
@@ -131,22 +116,6 @@ require('lazy').setup {
         },
       }
     end,
-  },
-  { -- Completion
-    'saghen/blink.cmp',
-    version = '*',
-    opts = {
-      keymap = { preset = 'super-tab' },
-      appearance = {
-        use_nvim_cmp_as_default = true,
-        nerd_font_variant = 'mono'
-      },
-      sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
-      },
-      signature = { enabled = true }
-    },
-    opts_extend = { "sources.default" }
   },
   { -- Formatting
     'stevearc/conform.nvim',
