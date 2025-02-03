@@ -111,6 +111,7 @@ require('lazy').setup {
       { 'williamboman/mason.nvim', opts = {} },
       'williamboman/mason-lspconfig.nvim',
       { 'j-hui/fidget.nvim',       opts = {} },
+      { 'saghen/blink.cmp' }
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -124,6 +125,7 @@ require('lazy').setup {
         end,
       })
 
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
       require('mason-lspconfig').setup {
         ensure_installed = { 'lua_ls' },
         automatic_installation = true,
