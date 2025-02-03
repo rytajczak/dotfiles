@@ -15,13 +15,33 @@ require('lazy').setup {
     version = false,
     config = function()
       require('mini.ai').setup()
+      require('mini.surround').setup()
       require('mini.statusline').setup()
     end,
   },
-  { -- Because mini.pairs is bad
+  {
     'windwp/nvim-autopairs',
-    event = 'InsertEnter',
-    config = true,
+    event = "InsertEnter",
+    config = true
+  },
+  {
+    'windwp/nvim-ts-autotag',
+    event = "InsertEnter",
+    config = true
+  },
+  { -- Syntax Hightlighting
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    main = 'nvim-treesitter.configs',
+    opts = {
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      auto_install = true,
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = { 'ruby' },
+      },
+      indent = { enable = true, disable = { 'ruby' } },
+    },
   },
   { -- File Manager
     'stevearc/oil.nvim',
@@ -29,9 +49,7 @@ require('lazy').setup {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require('oil').setup {
-        view_options = {
-          show_hidden = true
-        }
+        view_options = { show_hidden = true }
       }
       vim.keymap.set('n', '<leader>e', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
     end,
@@ -117,6 +135,24 @@ require('lazy').setup {
       }
     end,
   },
+  {
+    'saghen/blink.cmp',
+    dependencies = 'rafamadriz/friendly-snippets',
+    version = '*',
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      keymap = { preset = 'super-tab' },
+      appearance = {
+        use_nvim_cmp_as_default = true,
+        nerd_font_variant = 'mono'
+      },
+      sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+      },
+    },
+    opts_extend = { "sources.default" }
+  },
   { -- Formatting
     'stevearc/conform.nvim',
     opts = {
@@ -133,20 +169,6 @@ require('lazy').setup {
         lsp_format = 'fallback',
         timeout_ms = 500,
       },
-    },
-  },
-  { -- Syntax Hightlighting
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
-    main = 'nvim-treesitter.configs',
-    opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
-      auto_install = true,
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true, disable = { 'ruby' } },
     },
   },
   {
