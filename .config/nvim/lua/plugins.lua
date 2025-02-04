@@ -34,7 +34,7 @@ require('lazy').setup {
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs',
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'latex' },
       auto_install = true,
       highlight = {
         enable = true,
@@ -173,6 +173,22 @@ require('lazy').setup {
         timeout_ms = 500,
       },
     },
+  },
+  {
+    "OXY2DEV/markview.nvim",
+    lazy = false,
+    opts = {
+      latex = { enable = true }
+    }
+  },
+  {
+    'jubnzv/mdeval.nvim',
+    config = function()
+      require('mdeval').setup({
+        require_confirmation = false
+      })
+      vim.keymap.set('n', '<leader>c', "<cmd>lua require 'mdeval'.eval_code_block()<CR>")
+    end
   },
   {
     'Mofiqul/vscode.nvim',
