@@ -34,7 +34,7 @@ require('lazy').setup {
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs',
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'latex' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
       auto_install = true,
       highlight = {
         enable = true,
@@ -67,17 +67,23 @@ require('lazy').setup {
       end, { desc = 'Search nvim config files' })
     end,
   },
+  {
+    'rcarriga/nvim-notify',
+    config = function()
+      vim.notify = require('notify')
+    end
+  },
   { -- Task Manager
-    'stevearc/overseer.nvim',
+    -- 'stevearc/overseer.nvim',
+    'rr/overseer.nvim',
+    dir = '~/Projects/overseer/',
     dependencies = {
       { 'stevearc/dressing.nvim', opts = {} },
-      'rcarriga/nvim-notify'
     },
     config = function()
       require('overseer').setup {
         task_list = { direction = 'right' },
       }
-      vim.notify = require("notify")
 
       vim.api.nvim_create_user_command('OverseerRestartLast', function()
         local overseer = require 'overseer'
@@ -99,6 +105,7 @@ require('lazy').setup {
   },
   { -- You know Neovim is shit when you install a plugin to help write config
     'folke/lazydev.nvim',
+    ft = "lua",
     opts = {
       library = {
         { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
@@ -110,7 +117,6 @@ require('lazy').setup {
     dependencies = {
       { 'williamboman/mason.nvim', opts = {} },
       'williamboman/mason-lspconfig.nvim',
-      { 'j-hui/fidget.nvim',       opts = {} },
       { 'saghen/blink.cmp' }
     },
     config = function()
@@ -139,7 +145,6 @@ require('lazy').setup {
   },
   {
     'saghen/blink.cmp',
-    dependencies = 'rafamadriz/friendly-snippets',
     version = '*',
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -150,7 +155,24 @@ require('lazy').setup {
         nerd_font_variant = 'mono'
       },
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
+        default = { 'lsp', "lazydev", "path" },
+        providers = {
+          lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
+            score_offset = 100
+          }
+        }
+      },
+      completion = {
+        menu = {
+          draw = {
+            columns = {
+              { "kind_icon", "label", gap = 1 },
+            }
+          }
+        },
+        documentation = { auto_show = true }
       },
       signature = { enabled = true }
     },
