@@ -14,20 +14,27 @@ require('lazy').setup {
     'echasnovski/mini.nvim',
     version = false,
     config = function()
+      require('mini.pairs').setup({
+        modes = { insert = true, command = true, terminal = false },
+        skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
+        skip_ts = { "string" },
+        skip_unbalanced = true,
+        markdown = true,
+      })
       require('mini.ai').setup()
       require('mini.surround').setup()
       require('mini.statusline').setup()
     end,
   },
   {
-    'windwp/nvim-autopairs',
-    event = "InsertEnter",
-    config = true
+    "folke/ts-comments.nvim",
+    event = "VeryLazy",
+    opts = {},
   },
   {
     'windwp/nvim-ts-autotag',
-    event = "InsertEnter",
-    config = true
+    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+    opts = {},
   },
   { -- Syntax Hightlighting
     'nvim-treesitter/nvim-treesitter',
@@ -54,24 +61,33 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>e', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
     end,
   },
-  { -- Fuzzy Finder
-    'nvim-telescope/telescope.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      local builtin = require 'telescope.builtin'
-      vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Find files' })
-      vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Find by grep' })
-      vim.keymap.set('n', '<leader>,', builtin.buffers, { desc = 'Find buffers' })
-      vim.keymap.set('n', '<leader>fn', function()
-        builtin.find_files { cwd = vim.fn.stdpath 'config' }
-      end, { desc = 'Search nvim config files' })
-    end,
+  {
+    "ibhagwan/fzf-lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      winopts = {
+        height = 0.50,
+        width = 0.50,
+        row = 0.50,
+        col = 0.50,
+        winopts = {
+          number = false
+        }
+      }
+    },
+    keys = {
+      { "<leader>ff", "<cmd>FzfLua files<CR>",                                    desc = "Find files" },
+      { "<leader>fg", "<cmd>FzfLua live_grep<CR>",                                desc = "Live grep" },
+      { "<leader>,",  "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<CR>", desc = "Switch buffer" },
+      { "<leader>fF", "<cmd>FzfLua<CR>",                                          desc = "Open FzfLua" },
+    },
   },
   {
     'rcarriga/nvim-notify',
-    config = function()
-      vim.notify = require('notify')
-    end
+    opts = {
+      timeout = 1000,
+      background_colour = "#1f1f1f"
+    }
   },
   { -- Task Manager
     -- 'stevearc/overseer.nvim',
@@ -79,11 +95,14 @@ require('lazy').setup {
     dir = '~/Projects/overseer/',
     dependencies = {
       { 'stevearc/dressing.nvim', opts = {} },
+      'rcarriga/nvim-notify',
     },
     config = function()
       require('overseer').setup {
         task_list = { direction = 'right' },
       }
+
+      vim.notify = require('notify')
 
       vim.api.nvim_create_user_command('OverseerRestartLast', function()
         local overseer = require 'overseer'
@@ -109,6 +128,7 @@ require('lazy').setup {
     opts = {
       library = {
         { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+        { path = 'lazy.nvim',          words = { 'LazyVim' } },
       },
     },
   },
@@ -123,11 +143,11 @@ require('lazy').setup {
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('LspGroup', { clear = true }),
         callback = function()
-          local builtin = require 'telescope.builtin'
-          vim.keymap.set('n', 'gd', builtin.lsp_definitions, { desc = 'Goto definition' })
-          vim.keymap.set('n', 'gr', builtin.lsp_references, { desc = 'Goto reference' })
-          vim.keymap.set('n', 'rn', vim.lsp.buf.rename, { desc = 'Goto reference' })
-          vim.keymap.set('n', 'ca', vim.lsp.buf.code_action, { desc = 'Goto reference' })
+          vim.keymap.set('n', 'gd', '<CMD>FzfLua lsp_definitions jump_to_single_result=true ignore_current_line=true<CR>')
+          vim.keymap.set('n', 'gr', '<CMD>FzfLua lsp_references jump_to_single_result=true ignore_current_line=true<CR>')
+          vim.keymap.set('n', 'gI',
+            '<CMD>FzfLua lsp_implementations jump_to_single_result=true ignore_current_line=true<CR>')
+          vim.keymap.set('n', 'gy', '<CMD>FzfLua lsp_typedefs jump_to_single_result=true ignore_current_line=true<CR>')
         end,
       })
 
