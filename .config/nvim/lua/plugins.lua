@@ -16,8 +16,6 @@ require('lazy').setup {
     config = function()
       require('mini.pairs').setup({
         modes = { insert = true, command = true, terminal = false },
-        skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
-        skip_ts = { "string" },
         skip_unbalanced = true,
         markdown = true,
       })
@@ -66,12 +64,15 @@ require('lazy').setup {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       winopts = {
-        height = 0.50,
-        width = 0.50,
+        height = 0.75,
+        width = 0.75,
         row = 0.50,
         col = 0.50,
-        winopts = {
-          number = false
+        backdrop = 100,
+        preview = {
+          winopts = {
+            number = false
+          }
         }
       }
     },
@@ -148,6 +149,7 @@ require('lazy').setup {
           vim.keymap.set('n', 'gI',
             '<CMD>FzfLua lsp_implementations jump_to_single_result=true ignore_current_line=true<CR>')
           vim.keymap.set('n', 'gy', '<CMD>FzfLua lsp_typedefs jump_to_single_result=true ignore_current_line=true<CR>')
+          vim.keymap.set('n', 'ca', '<CMD>FzfLua lsp_code_actions<CR>')
         end,
       })
 
