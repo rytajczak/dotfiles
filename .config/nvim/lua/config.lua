@@ -5,8 +5,8 @@ vim.scriptencoding = 'utf-8'
 o.encoding = 'utf-8'
 o.fileencoding = 'utf-8'
 
--- o.number = true
--- o.relativenumber = true
+o.number = true
+o.relativenumber = true
 o.signcolumn = 'yes'
 o.splitright = true
 o.splitbelow = true
