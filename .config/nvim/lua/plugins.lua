@@ -91,9 +91,7 @@ require('lazy').setup {
     }
   },
   { -- Task Manager
-    -- 'stevearc/overseer.nvim',
-    'rr/overseer.nvim',
-    dir = '~/Projects/overseer/',
+    'stevearc/overseer.nvim',
     dependencies = {
       { 'stevearc/dressing.nvim', opts = {} },
       'rcarriga/nvim-notify',
