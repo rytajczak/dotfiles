@@ -1,57 +1,86 @@
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+PLUGINS_BASE_DIR="$(echo $HOME)/.local/share/zsh-plugins"
+mkdir -p "${PLUGINS_BASE_DIR}"
 
-if [[ -f "/opt/homebrew/bin/brew" ]] then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
+function add_plugin() {
+    local plugin_name="$(echo "$1" | cut -d'/' -f2)"
+    local plugin_dir="${PLUGINS_BASE_DIR}/${plugin_name}"
+    if [ ! -d "${plugin_dir}" ]; then
+        echo "Installing $1..."
+        git clone "https://github.com/$1" "${plugin_dir}"
+    fi
+    if [ -d "${plugin_dir}" ]; then
+        if [ -f "${plugin_dir}/${plugin_name}.zsh" ]; then
+            source "${plugin_dir}/${plugin_name}.zsh"
+        elif [ -f "${plugin_dir}/${plugin_name}.plugin.zsh" ]; then
+            source "${plugin_dir}/${plugin_name}.plugin.zsh"
+        else
+            echo "Couldn't auto-detect plugin file for ${plugin_dir}"
+        fi
+    fi
+}
 
-# Set the directory we want to store zinit and plugins
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-
-# Download Zinit, if it's not there yet
-if [ ! -d "$ZINIT_HOME" ]; then
-   mkdir -p "$(dirname $ZINIT_HOME)"
-   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-fi
-
-# Source/Load zinit
-source "${ZINIT_HOME}/zinit.zsh"
-
-# Add in zsh plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
-
-autoload -Uz compinit && compinit
-zinit cdreplay -q
+add_plugin zsh-users/zsh-autosuggestions
+add_plugin zsh-users/zsh-syntax-highlighting
 
 # History
-HISTSIZE=5000
-HISTFILE=~/.zsh_history
+HISTSIZE=10000
 SAVEHIST=$HISTSIZE
-HISTDUP=erase
+HISTFILE=~/.zsh_history
+
+# History 
 setopt appendhistory
 setopt sharehistory
+setopt extendedhistory
 setopt hist_ignore_space
 setopt hist_ignore_all_dups
 setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
+setopt hist_expire_dups_first
 
-# Completion styling
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+autoload -Uz compinit
+compinit
 
-# Aliases
-alias ls='ls --color'
-alias c='clear'
+# Alias
+alias vim='nvim'
+alias lvim='NVIM_APPNAME=lvim nvim'
+alias code='cursor'
+alias ls='ls -G'
 
-# Shell integrations
+# Zoxide my beloved <3
+if command -v zoxide &> /dev/null; then
+    eval "$(zoxide init --cmd cd zsh)"
+else
+    echo "hint: install zoxide"
+fi
+
+# Hooks
 eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
 eval "$(starship init zsh)"
+
+export EDITOR=nvim
+export TERMINAL=ghostty
+export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_ENV_HINTS=1
+
+# bun completions
+[ -s "/Users/ryan/.bun/_bun" ] && source "/Users/ryan/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# rustup
+export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
+
+# cargo installs
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="/Users/ryan/.config/herd-lite/bin:$PATH"
+export PHP_INI_SCAN_DIR="/Users/ryan/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+
+# pnpm
+export PNPM_HOME="/Users/ryan/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
