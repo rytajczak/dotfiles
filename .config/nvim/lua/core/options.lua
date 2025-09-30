@@ -1,0 +1,22 @@
+local opt = vim.opt
+
+opt.clipboard = vim.env.SSH_TTY and '' or 'unnamedplus'
+opt.cmdheight = 0
+opt.confirm = true
+opt.cursorline = true
+opt.ignorecase = true
+opt.inccommand = 'nosplit'
+opt.mouse = 'a'
+opt.number = true
+opt.relativenumber = true
+opt.scrolloff = 10
+opt.shiftwidth = 4
+opt.signcolumn = 'yes'
+opt.smartcase = true
+opt.splitbelow = true
+opt.splitright = true
+opt.swapfile = false
+opt.tabstop = 4
+opt.undofile = true
+opt.winborder = 'rounded'
+opt.wrap = false
