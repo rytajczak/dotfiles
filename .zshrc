@@ -22,12 +22,14 @@ function add_plugin() {
 add_plugin zsh-users/zsh-autosuggestions
 add_plugin zsh-users/zsh-syntax-highlighting
 
+# Completion
+autoload -Uz compinit
+compinit
+
 # History
 HISTSIZE=10000
 SAVEHIST=$HISTSIZE
 HISTFILE=~/.zsh_history
-
-# History 
 setopt appendhistory
 setopt sharehistory
 setopt extendedhistory
@@ -36,30 +38,25 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_expire_dups_first
 
-autoload -Uz compinit
-compinit
-
 # Alias
 alias vim='nvim'
-alias lvim='NVIM_APPNAME=lvim nvim'
 alias code='cursor'
-alias ls='ls -G'
-
-# Zoxide my beloved <3
-if command -v zoxide &> /dev/null; then
-    eval "$(zoxide init --cmd cd zsh)"
-else
-    echo "hint: install zoxide"
-fi
-
-# Hooks
-eval "$(fzf --zsh)"
-eval "$(starship init zsh)"
 
 export EDITOR=nvim
 export TERMINAL=ghostty
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
+
+# Hooks
+if command -v zoxide &> /dev/null; then
+    eval "$(zoxide init --cmd cd zsh)"
+else
+    echo "hint: install zoxide"
+fi
+eval "$(fzf --zsh)"
+eval "$(starship init zsh)"
+
+
 
 # bun completions
 [ -s "/Users/ryan/.bun/_bun" ] && source "/Users/ryan/.bun/_bun"
