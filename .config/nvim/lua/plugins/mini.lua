@@ -1,5 +1,5 @@
 return {
-  { 'tpope/vim-sleuth' },
+  'tpope/vim-sleuth',
   {
     'nvim-mini/mini.nvim',
     version = false,
@@ -35,9 +35,9 @@ return {
         vim.uv.os_setenv(rg_env, cached_rg_config)
       end
 
-      vim.keymap.set('n', '<leader>f', function()
+      pick.registry.files = function()
         load_temp_rg(function() pick.builtin.files({ tool = 'rg' }) end)
-      end, { desc = 'Open file picker' })
+      end
 
       require('mini.pick').setup()
       require('mini.snippets').setup()
@@ -45,6 +45,7 @@ return {
       require('mini.surround').setup()
     end,
     keys = {
+      { '<leader>f', function() MiniPick.registry.files() end, desc = 'Open file picker' },
       { '<leader>e', function() MiniFiles.open() end, desc = 'Open file explorer' },
     },
   },
