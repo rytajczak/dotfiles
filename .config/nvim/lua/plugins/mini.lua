@@ -46,6 +46,7 @@ return {
     end,
     keys = {
       { '<leader>f', function() MiniPick.registry.files() end, desc = 'Open file picker' },
+      { '<leader>/', function() MiniPick.builtin.grep_live() end, desc = 'Global search' },
       { '<leader>e', function() MiniFiles.open() end, desc = 'Open file explorer' },
     },
   },
