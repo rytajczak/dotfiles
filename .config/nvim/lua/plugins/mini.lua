@@ -1,11 +1,25 @@
 return {
   'tpope/vim-sleuth',
-  {
+  { -- ty Echasnovski <3
     'nvim-mini/mini.nvim',
-    version = false,
-    event = 'VeryLazy',
+    lazy = false,
     config = function()
-      require('mini.pairs').setup()
+      local pick = require('mini.pick')
+
+      local load_temp_rg = function(f)
+        local rg_env = 'RIPGREP_CONFIG_PATH'
+        local cached_rg_config = vim.uv.os_getenv(rg_env) or ''
+        vim.uv.os_setenv(rg_env, vim.fn.stdpath('config') .. '/.rg')
+        print(vim.fn.stdpath('config'))
+        f()
+        vim.uv.os_setenv(rg_env, cached_rg_config)
+      end
+
+      pick.registry.files = function()
+        load_temp_rg(function() pick.builtin.files() end)
+      end
+
+      require('mini.ai').setup()
       require('mini.clue').setup({
         triggers = {
           { mode = 'n', keys = '<leader>' },
@@ -23,26 +37,12 @@ return {
       require('mini.files').setup()
       require('mini.icons').setup()
       require('mini.notify').setup()
-
-      local pick = require('mini.pick')
-
-      local load_temp_rg = function(f)
-        local rg_env = 'RIPGREP_CONFIG_PATH'
-        local cached_rg_config = vim.uv.os_getenv(rg_env) or ''
-        vim.uv.os_setenv(rg_env, vim.fn.stdpath('config') .. '/.rg')
-        print(vim.fn.stdpath('config'))
-        f()
-        vim.uv.os_setenv(rg_env, cached_rg_config)
-      end
-
-      pick.registry.files = function()
-        load_temp_rg(function() pick.builtin.files({ tool = 'rg' }) end)
-      end
-
+      require('mini.pairs').setup()
       require('mini.pick').setup()
       require('mini.snippets').setup()
       require('mini.statusline').setup()
       require('mini.surround').setup()
+      require('mini.visits').setup()
     end,
     keys = {
       { '<leader>f', function() MiniPick.registry.files() end, desc = 'Open file picker' },
