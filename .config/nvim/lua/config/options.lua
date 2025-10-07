@@ -9,7 +9,6 @@ opt.list = true
 opt.mouse = "a"
 opt.number = true
 opt.path:append("**")
-opt.relativenumber = true
 opt.scrolloff = 4
 opt.shiftwidth = 4
 opt.sidescrolloff = 8
@@ -18,6 +17,7 @@ opt.smartcase = true
 opt.smartindent = true
 opt.splitbelow = true
 opt.splitright = true
+opt.statuscolumn = "%s%l%C  "
 opt.tabstop = 4
 opt.termguicolors = true
 opt.undofile = true
