@@ -1,26 +1,25 @@
 local opt = vim.opt
-
-opt.clipboard = vim.env.SSH_TTY and '' or 'unnamedplus'
+opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
 opt.confirm = true
 opt.cursorline = true
-opt.ignorecase = true
-opt.inccommand = 'nosplit'
+opt.fillchars = { eob = " " }
+opt.inccommand = "nosplit"
 opt.laststatus = 3
 opt.list = true
-opt.mouse = 'a'
+opt.mouse = "a"
 opt.number = true
+opt.path:append("**")
 opt.relativenumber = true
 opt.scrolloff = 4
 opt.shiftwidth = 4
 opt.sidescrolloff = 8
-opt.signcolumn = 'yes'
+opt.signcolumn = "yes"
+opt.smartcase = true
 opt.smartindent = true
-opt.smoothscroll = true
 opt.splitbelow = true
 opt.splitright = true
 opt.tabstop = 4
+opt.termguicolors = true
 opt.undofile = true
-opt.undolevels = 10000
-opt.updatetime = 200
-opt.winborder = 'rounded'
+opt.winborder = "rounded"
 opt.wrap = false
