@@ -1,0 +1,104 @@
+(defvar show-media-controls false)
+
+;; Top bar
+(defwidget bar []
+  (centerbox
+    (box :halign "start"
+         :space-evenly false
+         :spacing 12
+         :style "padding-left: 12px"
+      (music))
+    (box :space-evenly false)
+    (box :halign "end"
+         :space-evenly false
+         :style "padding-right: 12px;"
+         :spacing 12
+      (systray :icon-size 15
+               :prepend-new true)
+      (kbvariant)
+      (clock))))
+
+;; Music module
+(defwidget music []
+  (box :space-evenly false
+       :spacing 6
+    (image :path {media != "" && media.artUrl != "" ? replace(media.artUrl, "^file:\/\/", "") : "./assets/MaterialSymbolsMusicNoteRounded.svg"}
+           :image-width 18)
+    (revealer :reveal {media.title == "" ? false : true}
+              :transition "slideright"
+      (eventbox :onhover "${EWW_CMD} update show-media-controls=true"
+                :onhoverlost "${EWW_CMD} update show-media-controls=false"
+        (box :space-evenly false
+             :valign "center"
+          (revealer :reveal show-media-controls
+                    :transition "slideright"
+            (box :space-evenly false
+                 :halign "center"
+                 :style "margin-right: 6px"
+              (eventbox :onclick "playerctl previous"
+                        :cursor "pointer"
+                        :class "media-button"
+                (image :path "./assets/MaterialSymbolsFastRewind.svg"
+                       :image-width 15))
+              (eventbox :onclick "playerctl play-pause"
+                      :cursor "pointer"
+                      :class "media-button"
+                (image :path {media.status == "Playing" ? "./assets/MaterialSymbolsPause.svg" : "./assets/MaterialSymbolsPlayArrow.svg" }
+                       :image-width 15))
+              (eventbox :onclick "playerctl next"
+                      :cursor "pointer"
+                      :class "media-button"
+                (image :path "./assets/MaterialSymbolsFastForward.svg"
+                       :image-width 15))))
+          (label :text "${media.artist == '' ? '' : media.artist + ' — '}${media.title}")
+          (revealer :reveal {media.status == "Paused" ? true : false}
+            (label :text "(paused)"
+                   :style "margin-left: 6px; color: #b7b7b7; font-weight: 500")))))))
+
+
+(defwidget kbvariant []
+  (box
+    (label :text {kb-variant == "Keyboard layout switched: 0" ? "US" : "Colemak DH"})))
+
+
+(defwidget clock []
+  (label :text "${formattime(EWW_TIME, '%I:%M %p')}"
+         :halign "start"
+         :class "clock"))
+
+
+(defwidget big-clock []
+  (box :orientation "v"
+       :valign "center"
+       :space-evenly false
+    (label :text "${formattime(EWW_TIME, '%I:%M')}"
+           :class "clock-time")
+    (label :text "${formattime(EWW_TIME, '%A %d %B')}"
+           :class "clock-date")))
+
+
+(deflisten media :initial ""
+  "bash ./scripts/media_query.sh")
+
+
+(deflisten kb-variant :initial ""
+  "niri msg event-stream | stdbuf -oL grep --line-buffered 'Keyboard layout switched'")
+
+
+(defwindow bar
+  :monitor 0
+  :stacking "fg"
+  :geometry (geometry :width "100%"
+                      :height "30px"
+                      :anchor "top center")
+  :exclusive true
+  (bar))
+
+
+(defwindow big-clock
+  :monitor 0
+  :stacking "bg"
+  :geometry (geometry :width "30%"
+                      :height "30%"
+                      :anchor "center")
+  (big-clock))
