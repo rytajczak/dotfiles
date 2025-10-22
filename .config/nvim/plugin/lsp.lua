@@ -22,16 +22,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 require("mason").setup()
 require("mason-lspconfig").setup()
+vim.lsp.config("qmlls", {
+  cmd = { "qmlls6" },
+})
+vim.lsp.enable("qmlls")
 
 vim.keymap.set("n", "<leader>m", "<cmd>Mason<CR>", { desc = "Manage LSP servers" })
-
-MiniDeps.add({ source = "folke/lazydev.nvim" })
-
-local package_path = vim.fn.stdpath("data") .. "/site/pack/deps"
-require("lazydev").setup({
-  library = {
-    vim.env.VIMRUNTIME,
-    package_path .. "/start/mini.nvim",
-    package_path .. "/opt/snacks.nvim",
-  },
-})

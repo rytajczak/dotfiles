@@ -36,6 +36,13 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_expire_dups_first
 
+precmd() {
+    precmd() {
+        echo
+    }
+}
+PROMPT="%F{blue}[%n@%m:%~]$%f "
+
 autoload -Uz compinit
 compinit
 
@@ -45,16 +52,12 @@ alias lvim='NVIM_APPNAME=lvim nvim'
 alias code='cursor'
 alias ls='ls -G'
 
-# Zoxide my beloved <3
-if command -v zoxide &> /dev/null; then
-    eval "$(zoxide init --cmd cd zsh)"
-else
-    echo "hint: install zoxide"
-fi
-
 # Hooks
 eval "$(fzf --zsh)"
-eval "$(starship init zsh)"
+eval "$(niri completions zsh)"
+if command -v zoxide &> /dev/null; then
+    eval "$(zoxide init --cmd cd zsh)"
+fi
 
 export EDITOR=nvim
 export TERMINAL=ghostty

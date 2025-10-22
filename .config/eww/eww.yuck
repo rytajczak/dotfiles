@@ -1,72 +1,88 @@
 (defvar show-media-controls false)
 
+(deflisten media :initial ""
+  "bash ./scripts/media_query.sh")
+
+(deflisten kb-layout :initial ""
+  "niri msg event-stream | stdbuf -oL grep --line-buffered 'Keyboard layout switched'")
+
 ;; Top bar
 (defwidget bar []
   (centerbox
     (box :halign "start"
          :space-evenly false
          :spacing 12
-         :style "padding-left: 12px"
+         :style "padding-left: 1rem"
       (music))
     (box :space-evenly false)
     (box :halign "end"
          :space-evenly false
-         :style "padding-right: 12px;"
+         :style "padding-right: 1rem;"
          :spacing 12
       (systray :icon-size 15
                :prepend-new true)
-      (kbvariant)
+      (screenrecorder)
+      ; (language)
       (clock))))
 
 ;; Music module
 (defwidget music []
   (box :space-evenly false
-       :spacing 6
-    (image :path {media != "" && media.artUrl != "" ? replace(media.artUrl, "^file:\/\/", "") : "./assets/MaterialSymbolsMusicNoteRounded.svg"}
-           :image-width 18)
+    (stack :selected {media.artUrl == "" ? 0 : 1}
+           :style "margin-right: 1rem"
+      (label :text "󰎇" :class "icon")
+      (image :path {replace(media.artUrl, "^file:\/\/", "")}
+             :image-height 15))
     (revealer :reveal {media.title == "" ? false : true}
               :transition "slideright"
       (eventbox :onhover "${EWW_CMD} update show-media-controls=true"
                 :onhoverlost "${EWW_CMD} update show-media-controls=false"
         (box :space-evenly false
              :valign "center"
-          (revealer :reveal show-media-controls
-                    :transition "slideright"
+          (revealer :reveal {show-media-controls || media.status == "Paused"}
+                    :transition "slideleft"
             (box :space-evenly false
-                 :halign "center"
-                 :style "margin-right: 6px"
+                 :style "margin-right: 1rem"
               (eventbox :onclick "playerctl previous"
                         :cursor "pointer"
                         :class "media-button"
-                (image :path "./assets/MaterialSymbolsFastRewind.svg"
-                       :image-width 15))
+                (label :text "󰒮"
+                       :style "font-size: 1.3rem"))
               (eventbox :onclick "playerctl play-pause"
                       :cursor "pointer"
                       :class "media-button"
-                (image :path {media.status == "Playing" ? "./assets/MaterialSymbolsPause.svg" : "./assets/MaterialSymbolsPlayArrow.svg" }
-                       :image-width 15))
+                (label :text {media.status == "Playing" ? "󰏤" : "󰐊"}
+                       :style "font-size: 1.3rem; margin: 0 6px;"))
               (eventbox :onclick "playerctl next"
                       :cursor "pointer"
                       :class "media-button"
-                (image :path "./assets/MaterialSymbolsFastForward.svg"
-                       :image-width 15))))
-          (label :text "${media.artist == '' ? '' : media.artist + ' — '}${media.title}")
-          (revealer :reveal {media.status == "Paused" ? true : false}
-            (label :text "(paused)"
-                   :style "margin-left: 6px; color: #b7b7b7; font-weight: 500")))))))
+                (label :text "󰒭"
+                       :style "font-size: 1.3rem"))))
+          (label :text "${media.artist == '' ? '' : media.artist + ' — '}${media.title}"
+                 :style {media.status == "Playing" ? "" : "color: #b7b7b7"}))))))
 
+;; Screenrecorder module
+(defwidget screenrecorder []
+  (box :space-evenly false
+    (label :text "   Recording...")
+    (label :text "0:12"
+           :style "color: #b7b7b7")))
 
-(defwidget kbvariant []
+;; keyboard module
+(defwidget language []
   (box
-    (label :text {kb-variant == "Keyboard layout switched: 0" ? "US" : "Colemak DH"})))
+    (label :text {kb-layout})))
 
-
+;; clock module
 (defwidget clock []
-  (label :text "${formattime(EWW_TIME, '%I:%M %p')}"
-         :halign "start"
-         :class "clock"))
+  (box :space-evenly false
+       :spacing 9
+    (label :text "" :class "icon")
+    (label :text "${formattime(EWW_TIME, '%I:%M %p')}"
+           :halign "start"
+           :class "clock")))
 
-
+;; Large desktop clock
 (defwidget big-clock []
   (box :orientation "v"
        :valign "center"
@@ -75,14 +91,6 @@
            :class "clock-time")
     (label :text "${formattime(EWW_TIME, '%A %d %B')}"
            :class "clock-date")))
-
-
-(deflisten media :initial ""
-  "bash ./scripts/media_query.sh")
-
-
-(deflisten kb-variant :initial ""
-  "niri msg event-stream | stdbuf -oL grep --line-buffered 'Keyboard layout switched'")
 
 
 (defwindow bar
@@ -95,7 +103,7 @@
   (bar))
 
 
-(defwindow big-clock
+(defwindow bg-clock
   :monitor 0
   :stacking "bg"
   :geometry (geometry :width "30%"

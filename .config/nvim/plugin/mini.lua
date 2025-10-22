@@ -1,3 +1,5 @@
+require("mini.animate").setup()
+
 require("mini.bracketed").setup()
 vim.keymap.set("n", "[q", ":cp<CR>")
 vim.keymap.set("n", "]q", ":cn<CR>")
@@ -42,6 +44,8 @@ vim.keymap.set("n", "<leader>.", function() MiniFiles.open(vim.fn.stdpath("confi
 require("mini.hipatterns").setup()
 
 require("mini.icons").setup()
+
+require("mini.pairs").setup()
 
 local gen_loader = require("mini.snippets").gen_loader
 require("mini.snippets").setup({
