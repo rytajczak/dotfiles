@@ -1,3 +1,5 @@
+require("mini.ai").setup()
+
 require("mini.animate").setup()
 
 require("mini.bracketed").setup()
@@ -46,14 +48,6 @@ require("mini.hipatterns").setup()
 require("mini.icons").setup()
 
 require("mini.pairs").setup()
-
-local gen_loader = require("mini.snippets").gen_loader
-require("mini.snippets").setup({
-  snippets = {
-    gen_loader.from_file("~/.config/nvim/snippets/global.json"),
-    gen_loader.from_lang(),
-  },
-})
 
 require("mini.statusline").setup()
 

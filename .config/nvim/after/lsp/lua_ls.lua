@@ -10,7 +10,6 @@ return {
         library = {
           vim.env.VIMRUNTIME,
           package_path .. "/start/mini.nvim",
-          package_path .. "/opt/snacks.nvim",
         },
       },
       telemetry = { enable = false },

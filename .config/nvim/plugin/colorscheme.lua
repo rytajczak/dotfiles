@@ -1,7 +1,6 @@
 MiniDeps.now(function()
   MiniDeps.add({ source = "folke/tokyonight.nvim" })
   MiniDeps.add({ source = "vague2k/vague.nvim" })
-  MiniDeps.add({ source = "mofiqul/adwaita.nvim" })
 end)
 
 vim.api.nvim_create_autocmd("VimEnter", {
