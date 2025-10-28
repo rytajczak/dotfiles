@@ -27,7 +27,6 @@ HISTSIZE=10000
 SAVEHIST=$HISTSIZE
 HISTFILE=~/.zsh_history
 
-# History 
 setopt appendhistory
 setopt sharehistory
 setopt extendedhistory
@@ -36,12 +35,9 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_expire_dups_first
 
-precmd() {
-    precmd() {
-        echo
-    }
-}
-PROMPT="%F{blue}[%n@%m:%~]$%f "
+# Prompt
+PROMPT="%F{blue}%~%f"$'\n'"%F{green}$%f "
+precmd() { precmd() { echo } }
 
 autoload -Uz compinit
 compinit
