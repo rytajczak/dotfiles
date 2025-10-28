@@ -5,6 +5,7 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.o.number = false
     vim.o.relativenumber = false
+    vim.o.statuscolumn = ""
 
     vim.keymap.set("n", "S", ":Git add .<CR>", {
       buffer = true,

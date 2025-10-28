@@ -17,7 +17,6 @@ require("mini.clue").setup({
 
 require("mini.completion").setup({
   window = {
-    info = { border = "rounded" },
     signature = { border = "rounded" },
   },
   delay = { completion = 0, info = 0, signature = 0 },
@@ -33,7 +32,7 @@ require("mini.cursorword").setup()
 require("mini.diff").setup({
   view = {
     style = "sign",
-    signs = { add = "+", change = "~", delete = "-" },
+    signs = { add = "▎", change = "▎", delete = "▎" },
   },
 })
 
@@ -42,8 +41,6 @@ require("mini.extra").setup()
 require("mini.files").setup()
 vim.keymap.set("n", "<leader>e", function() MiniFiles.open() end, { desc = "Open file explorer" })
 vim.keymap.set("n", "<leader>.", function() MiniFiles.open(vim.fn.stdpath("config")) end, { desc = "Edit config" })
-
-require("mini.hues").setup({ background = "#141414", foreground = "#c0c8cc" })
 
 require("mini.icons").setup()
 

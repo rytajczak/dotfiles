@@ -1,7 +1,10 @@
-MiniDeps.add({ source = "neovim/nvim-lspconfig", depends = {
-  "mason-org/mason.nvim",
-  "mason-org/mason-lspconfig.nvim",
-} })
+MiniDeps.add({
+  source = "neovim/nvim-lspconfig",
+  depends = {
+    "mason-org/mason.nvim",
+    "mason-org/mason-lspconfig.nvim",
+  },
+})
 
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function()
