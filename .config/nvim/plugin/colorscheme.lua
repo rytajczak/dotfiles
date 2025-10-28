@@ -1,7 +1,5 @@
-MiniDeps.now(function()
-  MiniDeps.add({ source = "folke/tokyonight.nvim" })
-  MiniDeps.add({ source = "vague2k/vague.nvim" })
-end)
+MiniDeps.add({ source = "vague-theme/vague.nvim" })
+MiniDeps.add({ source = "folke/tokyonight.nvim" })
 
 vim.api.nvim_create_autocmd("VimEnter", {
   nested = true,
