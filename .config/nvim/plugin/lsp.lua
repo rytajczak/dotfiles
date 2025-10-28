@@ -1,10 +1,7 @@
-MiniDeps.add({
-  source = "neovim/nvim-lspconfig",
-  depends = {
-    "mason-org/mason.nvim",
-    "mason-org/mason-lspconfig.nvim",
-  },
-})
+MiniDeps.add({ source = "neovim/nvim-lspconfig", depends = {
+  "mason-org/mason.nvim",
+  "mason-org/mason-lspconfig.nvim",
+} })
 
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function()
@@ -22,9 +19,5 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 require("mason").setup()
 require("mason-lspconfig").setup()
-vim.lsp.config("qmlls", {
-  cmd = { "qmlls6" },
-})
-vim.lsp.enable("qmlls")
 
 vim.keymap.set("n", "<leader>m", "<cmd>Mason<CR>", { desc = "Manage LSP servers" })

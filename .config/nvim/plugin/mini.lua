@@ -43,11 +43,9 @@ require("mini.files").setup()
 vim.keymap.set("n", "<leader>e", function() MiniFiles.open() end, { desc = "Open file explorer" })
 vim.keymap.set("n", "<leader>.", function() MiniFiles.open(vim.fn.stdpath("config")) end, { desc = "Edit config" })
 
-require("mini.hipatterns").setup()
+require("mini.hues").setup({ background = "#141414", foreground = "#c0c8cc" })
 
 require("mini.icons").setup()
-
-require("mini.pairs").setup()
 
 require("mini.statusline").setup()
 

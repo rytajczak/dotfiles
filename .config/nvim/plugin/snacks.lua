@@ -12,12 +12,6 @@ require("snacks").setup({
       },
     },
   },
-  indent = {},
-  statuscolumn = {
-    left = { "sign", "git" },
-    right = { "fold" },
-    folds = { open = true },
-  },
 })
 
 vim.keymap.set("n", "<leader>f", Snacks.picker.files, { desc = "Open file picker" })

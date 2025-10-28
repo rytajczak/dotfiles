@@ -25,7 +25,7 @@ add_plugin zsh-users/zsh-syntax-highlighting
 # History
 HISTSIZE=10000
 SAVEHIST=$HISTSIZE
-HISTFILE=~/.zsh_history
+HISTFILE=~/.cache/zsh/history
 
 setopt appendhistory
 setopt sharehistory
@@ -40,6 +40,9 @@ PROMPT="%F{blue}%~%f"$'\n'"%F{green}$%f "
 precmd() { precmd() { echo } }
 
 autoload -Uz compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+_comp_options+=(globdots)
 compinit
 
 # Alias

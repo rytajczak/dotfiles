@@ -3,7 +3,6 @@ vim.g.maplocalleader = "\\"
 
 vim.o.autoindent = true
 vim.o.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
-vim.o.conceallevel = 2
 vim.o.confirm = true
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
@@ -14,16 +13,19 @@ vim.o.list = true
 vim.o.number = true
 vim.o.pumheight = 10
 vim.o.relativenumber = true
+vim.o.shiftwidth = 4
 vim.o.showmode = false
 vim.o.signcolumn = "yes"
 vim.o.smartindent = true
 vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.swapfile = false
+vim.o.tabstop = 4
 vim.o.timeoutlen = 300
 vim.o.undofile = true
 vim.o.winborder = "rounded"
 vim.o.wrap = false
+vim.o.statuscolumn = "%s%l  "
 
 vim.opt.fillchars = {
   foldopen = "",
@@ -38,19 +40,11 @@ vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to upper window" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
-
-vim.keymap.set("n", "<leader>w", "<cmd>bd<CR>", { desc = "Delete buffer" })
-
+vim.keymap.set("n", "q:", "<nop>")
 vim.keymap.set("n", "<Esc>", function()
   vim.cmd("nohl")
-  vim.snippet.stop()
   return "<Esc>"
 end)
-
-if vim.g.neovide then
-  vim.o.linespace = 20
-  vim.g.neovide_scale_factor = 1.1
-end
 
 local path_package = vim.fn.stdpath("data") .. "/site/"
 local mini_path = path_package .. "pack/deps/start/mini.nvim"
