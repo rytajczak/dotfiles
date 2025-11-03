@@ -16,12 +16,9 @@ require("mini.clue").setup({
 })
 
 require("mini.completion").setup({
-  window = {
-    signature = { border = "rounded" },
-  },
+  window = {},
   delay = { completion = 0, info = 0, signature = 0 },
 })
-
 vim.keymap.set("i", "<Tab>", [[pumvisible() ? "\<C-n>\<C-y>" : "\<Tab>"]], { expr = true })
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function() vim.g.minicompletion_disable = vim.bo.buftype ~= "" end,
@@ -38,11 +35,46 @@ require("mini.diff").setup({
 
 require("mini.extra").setup()
 
-require("mini.files").setup()
-vim.keymap.set("n", "<leader>e", function() MiniFiles.open() end, { desc = "Open file explorer" })
-vim.keymap.set("n", "<leader>.", function() MiniFiles.open(vim.fn.stdpath("config")) end, { desc = "Edit config" })
+require("mini.files").setup({})
+vim.keymap.set("n", "<leader>e", function()
+  if MiniFiles.close() then return end
+  MiniFiles.open()
+end, { desc = "Open file explorer" })
+vim.keymap.set("n", "<leader>.", function() MiniFiles.open(vim.fn.stdpath("config")) end, { desc = "Edit neovim config" })
 
 require("mini.icons").setup()
+
+require("mini.pick").setup({
+  window = {
+    config = function()
+      local height = math.floor(0.5 * vim.o.lines)
+      local width = math.floor(0.5 * vim.o.columns)
+      return {
+        anchor = "NW",
+        height = height,
+        width = width,
+        row = math.floor(0.5 * (vim.o.lines - height)),
+        col = math.floor(0.5 * (vim.o.columns - width)),
+      }
+    end,
+  },
+  mappings = {
+    to_quickfix = {
+      char = "<C-q>",
+      func = function()
+        local items = MiniPick.get_picker_items() or {}
+        MiniPick.default_choose_marked(items)
+        return true
+      end,
+    },
+  },
+})
+vim.keymap.set("n", "<leader>f", "<cmd>Pick files<cr>", { desc = "Open file picker" })
+vim.keymap.set("n", "<leader>F", "<cmd>Pick buf_lines<cr>", { desc = "Open line picker" })
+vim.keymap.set("n", "<leader>d", "<cmd>Pick diagnostic<cr>", { desc = "Open diagnostic picker" })
+vim.keymap.set("n", "<leader>/", "<cmd>Pick grep_live<cr>", { desc = "Global search" })
+
+require("mini.snippets").setup()
 
 require("mini.statusline").setup()
 

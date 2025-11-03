@@ -11,8 +11,14 @@ vim.api.nvim_create_autocmd("FileType", {
       buffer = true,
       desc = "Stage all files",
     })
-    vim.keymap.set("n", "q", ":bd<CR>", { buffer = true })
   end,
 })
 
-vim.keymap.set("n", "<leader>g", ":Git<CR>", { desc = "Open git client" })
+vim.keymap.set("n", "<leader>g", function()
+  local buf = require("utils").find_buffer("fugitive")
+  if buf then
+    vim.cmd("bd " .. buf)
+  else
+    vim.cmd("Git")
+  end
+end, { desc = "Open git client" })
