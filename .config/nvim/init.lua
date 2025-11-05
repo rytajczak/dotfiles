@@ -1,34 +1,30 @@
-vim.g.mapleader = " "
-
 vim.o.autoindent = true
 vim.o.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
+vim.o.cmdheight = 0
 vim.o.confirm = true
 vim.o.foldlevel = 99
-vim.o.foldlevelstart = 99
 vim.o.ignorecase = true
 vim.o.incsearch = true
 vim.o.laststatus = 3
 vim.o.list = true
 vim.o.number = true
-vim.o.pumheight = 10
 vim.o.relativenumber = true
-vim.o.shiftwidth = 2
+vim.o.shiftwidth = 4
 vim.o.showmode = false
 vim.o.signcolumn = "yes"
 vim.o.smartcase = true
 vim.o.smartindent = true
 vim.o.splitbelow = true
 vim.o.splitright = true
-vim.o.statuscolumn = "%s%l  %C  "
+vim.o.statuscolumn = "%s%l %C  "
 vim.o.swapfile = false
-vim.o.tabstop = 2
+vim.o.tabstop = 4
 vim.o.timeoutlen = 300
 vim.o.undofile = true
-vim.o.updatetime = 250
 vim.o.winborder = "rounded"
 vim.o.wrap = false
 
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.g.mapleader = " "
 
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to lower window" })
