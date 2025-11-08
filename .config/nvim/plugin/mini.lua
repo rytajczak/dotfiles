@@ -70,7 +70,6 @@ require("mini.pick").setup({
   },
 })
 vim.keymap.set("n", "<leader>f", "<cmd>Pick files<cr>", { desc = "Open file picker" })
-vim.keymap.set("n", "<leader>F", "<cmd>Pick buf_lines<cr>", { desc = "Open line picker" })
 vim.keymap.set("n", "<leader>d", "<cmd>Pick diagnostic<cr>", { desc = "Open diagnostic picker" })
 vim.keymap.set("n", "<leader>/", "<cmd>Pick grep_live<cr>", { desc = "Global search" })
 
