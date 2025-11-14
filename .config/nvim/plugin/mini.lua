@@ -1,11 +1,3 @@
-require("mini.ai").setup()
-
-require("mini.animate").setup()
-
-require("mini.bracketed").setup()
-vim.keymap.set("n", "[q", ":cp<CR>")
-vim.keymap.set("n", "]q", ":cn<CR>")
-
 require("mini.clue").setup({
   triggers = {
     { mode = "n", keys = "<leader>" },
@@ -26,13 +18,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 require("mini.cursorword").setup()
 
-require("mini.diff").setup({
-  view = {
-    style = "sign",
-    signs = { add = "▎", change = "▎", delete = "▎" },
-  },
-})
-
 require("mini.extra").setup()
 
 require("mini.files").setup({})
@@ -47,8 +32,8 @@ require("mini.icons").setup()
 require("mini.pick").setup({
   window = {
     config = function()
-      local height = math.floor(0.5 * vim.o.lines)
-      local width = math.floor(0.5 * vim.o.columns)
+      local height = math.floor(0.618 * vim.o.lines)
+      local width = math.floor(0.618 * vim.o.columns)
       return {
         anchor = "NW",
         height = height,
@@ -70,6 +55,7 @@ require("mini.pick").setup({
   },
 })
 vim.keymap.set("n", "<leader>f", "<cmd>Pick files<cr>", { desc = "Open file picker" })
+vim.keymap.set("n", "<leader>F", "<cmd>Pick buf_lines<cr>", { desc = "Open line picker" })
 vim.keymap.set("n", "<leader>d", "<cmd>Pick diagnostic<cr>", { desc = "Open diagnostic picker" })
 vim.keymap.set("n", "<leader>/", "<cmd>Pick grep_live<cr>", { desc = "Global search" })
 

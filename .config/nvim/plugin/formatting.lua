@@ -1,3 +1,4 @@
+MiniDeps.add({ source = "tpope/vim-sleuth" })
 MiniDeps.add({ source = "stevearc/conform.nvim" })
 
 local formatters_by_ft = {
