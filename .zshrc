@@ -26,7 +26,6 @@ add_plugin zsh-users/zsh-syntax-highlighting
 HISTSIZE=10000
 SAVEHIST=$HISTSIZE
 HISTFILE=~/.cache/zsh/history
-
 setopt appendhistory
 setopt sharehistory
 setopt extendedhistory
@@ -35,20 +34,31 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_expire_dups_first
 
-# Prompt
-PROMPT="%F{blue}%~%f"$'\n'"%F{green}$%f "
-precmd() { precmd() { echo } }
-
+# Completion
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 _comp_options+=(globdots)
 compinit
 
+# VCS integration
+autoload -Uz vcs_info add-zsh-hook
+setopt prompt_subst
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr '%F{245}+%f'
+zstyle ':vcs_info:git:*' unstagedstr '%F{245}*%f'
+zstyle ':vcs_info:git:*' formats '%F{245}%b%f%u%c'
+zstyle ':vcs_info:git:*' actionformats '%F{245}%b|%a%f%u%c'
+add-zsh-hook precmd vcs_info
+
+# Prompt
+PROMPT='%F{blue}%~%f %F{245}${vcs_info_msg_0_}%f'$'\n''%F{magenta}$%f '
+precmd() { precmd() {echo} }
+
 # Alias
 alias vim='nvim'
-alias lvim='NVIM_APPNAME=lvim nvim'
-alias code='cursor'
+alias mvim='NVIM_APPNAME=nvim-minimax nvim'
 alias ls='ls -G'
 
 # Hooks
