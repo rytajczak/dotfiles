@@ -53,13 +53,12 @@ zstyle ':vcs_info:git:*' actionformats '%F{245}%b|%a%f%u%c'
 add-zsh-hook precmd vcs_info
 
 # Prompt
-PROMPT='%F{blue}%~%f %F{245}${vcs_info_msg_0_}%f'$'\n''%F{magenta}$%f '
+PROMPT='%F{blue}%~%f %F{245}${vcs_info_msg_0_}%f'$'\n''$ '
 precmd() { precmd() {echo} }
 
 # Alias
 alias vim='nvim'
-alias mvim='NVIM_APPNAME=nvim-minimax nvim'
-alias ls='ls -G'
+alias ls='ls --color'
 
 # Hooks
 eval "$(fzf --zsh)"

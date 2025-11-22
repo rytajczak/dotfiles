@@ -4,6 +4,7 @@ vim.o.autoindent = true
 vim.o.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
 vim.o.cmdheight = 0
 vim.o.confirm = true
+vim.o.fillchars = "eob: "
 vim.o.foldlevel = 99
 vim.o.ignorecase = true
 vim.o.incsearch = true
