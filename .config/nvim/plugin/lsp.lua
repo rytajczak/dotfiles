@@ -21,5 +21,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
+vim.lsp.config("qmlls", {
+  cmd = { '/usr/bin/qmlls6' }
+})
+vim.lsp.enable("qmlls")
+
 require("mason").setup()
 require("mason-lspconfig").setup()

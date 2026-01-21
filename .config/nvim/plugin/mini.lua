@@ -29,7 +29,23 @@ vim.keymap.set("n", "<leader>.", function() MiniFiles.open(vim.fn.stdpath("confi
 
 require("mini.icons").setup()
 
-require("mini.pick").setup({
+local pick = require("mini.pick")
+
+local load_temp_rg = function(f)
+  local rg_env = 'RIPGREP_CONFIG_PATH'
+  local cached_rg_config = vim.uv.os_getenv(rg_env) or ''
+  vim.uv.os_setenv(rg_env, vim.fn.stdpath('config') .. '/.rg')
+  f()
+  vim.uv.os_setenv(rg_env, cached_rg_config)
+end
+
+pick.registry.ff = function()
+  load_temp_rg(function()
+    pick.builtin.files({ tool = 'rg' })
+  end)
+end
+
+pick.setup({
   window = {
     config = function()
       local height = math.floor(0.618 * vim.o.lines)
@@ -54,7 +70,8 @@ require("mini.pick").setup({
     },
   },
 })
-vim.keymap.set("n", "<leader>f", "<cmd>Pick files<cr>", { desc = "Open file picker" })
+
+vim.keymap.set("n", "<leader>f", "<cmd>Pick ff<cr>", { desc = "Open file picker" })
 vim.keymap.set("n", "<leader>F", "<cmd>Pick buf_lines<cr>", { desc = "Open line picker" })
 vim.keymap.set("n", "<leader>d", "<cmd>Pick diagnostic<cr>", { desc = "Open diagnostic picker" })
 vim.keymap.set("n", "<leader>/", "<cmd>Pick grep_live<cr>", { desc = "Global search" })
